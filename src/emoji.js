@@ -26,13 +26,16 @@ export default class Emoji extends Plugin {
 
 		editor.editing.view.addObserver( ClickObserver );
 
+		editor.config.define( 'emojiSmileyIcon', emojiIcon );
+
 		editor.config.define( 'emoji', [
 			{ name: 'smile', text: '😀' },
 			{ name: 'wink', text: '😉' },
 			{ name: 'cool', text: '😎' },
 			{ name: 'surprise', text: '😮' },
 			{ name: 'confusion', text: '😕' },
-			{ name: 'crying', text: '😢' }
+			{ name: 'crying', text: '😢' },
+			{ name: 'smile', text: '😡' }
 		] );
 
 		/**
@@ -55,16 +58,13 @@ export default class Emoji extends Plugin {
 
 			button.isEnabled = true;
 			button.label = editor.t( 'Emoji' );
-			button.icon = emojiIcon;
+			button.icon = editor.config.get( 'emojiSmileyIcon' );
 			button.tooltip = true;
-			// Ugly hack for https://github.com/ckeditor/ckeditor5-ui/issues/350
-			/* eslint-env browser */
-			setTimeout( function() {
-				button.iconView.set( 'viewBox', '0 0 128 128' );
-			}, 0 );
 
 			// Show the panel on button click.
 			this.listenTo( button, 'execute', () => this._showPanel( true ) );
+
+			this._button = button;
 
 			return button;
 		} );
@@ -85,7 +85,10 @@ export default class Emoji extends Plugin {
 		editor.config.get( 'emoji' ).forEach( emoji => {
 			this.listenTo( emojiView, 'emoji:' + emoji.name, () => {
 				editor.model.change( writer => {
-					writer.insertText( emoji.text, editor.model.document.selection.getFirstPosition() );
+					writer.insertText(
+						emoji.text,
+						editor.model.document.selection.getFirstPosition()
+					);
 					this._hidePanel();
 				} );
 			} );
@@ -101,31 +104,18 @@ export default class Emoji extends Plugin {
 	}
 
 	/**
-	 * Returns positioning options for the {@link #_balloon}. They control the way the balloon is attached
-	 * to the target element or selection.
-	 *
-	 * If the selection is collapsed and inside a link element, the panel will be attached to the
-	 * entire link element. Otherwise, it will be attached to the selection.
-	 *
-	 * @private
-	 * @returns {module:utils/dom/position~Options}
-	 */
-	_getBalloonPositionData() {
-		const view = this.editor.editing.view;
-		const viewDocument = view.document;
-		const target =
-			view.domConverter.viewRangeToDom( viewDocument.selection.getFirstRange() );
-
-		return { target };
-	}
-
-	/**
 	 * Adds the {@link #formView} to the {@link #_balloon}.
 	 */
-	_showPanel( ) {
+	_showPanel() {
+		const target = this._button.element;
 		this._balloon.add( {
+			withArrow: false,
 			view: this.formView,
-			position: this._getBalloonPositionData()
+			balloonClassName: 'emoji-balloon-panel',
+			position: {
+				target,
+				limiter: target
+			}
 		} );
 	}
 
@@ -137,17 +127,24 @@ export default class Emoji extends Plugin {
 	 */
 	_attachActions() {
 		// Focus the form if the balloon is visible and the Tab key has been pressed.
-		this.editor.keystrokes.set( 'Tab', ( data, cancel ) => {
-			if ( this._balloon.visibleView === this.formView && !this.formView.focusTracker.isFocused ) {
-				this.formView.focus();
-				cancel();
+		this.editor.keystrokes.set(
+			'Tab',
+			( data, cancel ) => {
+				if (
+					this._balloon.visibleView === this.formView &&
+					!this.formView.focusTracker.isFocused
+				) {
+					this.formView.focus();
+					cancel();
+				}
+			},
+			{
+				// Use the high priority because the emoji UI navigation is more important
+				// than other feature's actions, e.g. list indentation.
+				// https://github.com/ckeditor/ckeditor5-link/issues/146
+				priority: 'high'
 			}
-		}, {
-			// Use the high priority because the emoji UI navigation is more important
-			// than other feature's actions, e.g. list indentation.
-			// https://github.com/ckeditor/ckeditor5-link/issues/146
-			priority: 'high'
-		} );
+		);
 
 		// Close the panel on the Esc key press when the editable has focus and the balloon is visible.
 		this.editor.keystrokes.set( 'Esc', ( data, cancel ) => {
