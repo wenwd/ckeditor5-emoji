@@ -8,10 +8,14 @@
     width: 400px!important;
     height: 300px;
     white-space: normal!important;
-    & .ck-button {
-        font-size: 20px;
-        padding: 0.3em 0.5em 0;
-        border: 0;
-    }
+
+}
+.emoji-balloon-panel .ck-emoji__actions .ck-button {
+    font-size: 24px;
+    padding: 0.3em 0.5em 0;
+    border: 0;
+}
+.emoji-balloon-panel .ck-emoji__actions .ck-button svg image{
+    width: 42px;
 }
 

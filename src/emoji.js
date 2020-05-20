@@ -6,6 +6,27 @@ import ContextualBalloon from '@ckeditor/ckeditor5-ui/src/panel/balloon/contextu
 import ClickObserver from '@ckeditor/ckeditor5-engine/src/view/observer/clickobserver';
 import clickOutsideHandler from '@ckeditor/ckeditor5-ui/src/bindings/clickoutsidehandler';
 
+import addoil from '../theme/icons/wxemoji/addoil.svg';
+import cold from '../theme/icons/wxemoji/cold.svg';
+import i_2_02 from '../theme/icons/wxemoji/i_2_02.svg';
+import i_2_04 from '../theme/icons/wxemoji/i_2_04.svg';
+import i_2_05 from '../theme/icons/wxemoji/i_2_05.svg';
+import i_2_06 from '../theme/icons/wxemoji/i_2_06.svg';
+import i_2_07 from '../theme/icons/wxemoji/i_2_07.svg';
+import i_2_09 from '../theme/icons/wxemoji/i_2_09.svg';
+import i_2_11 from '../theme/icons/wxemoji/i_2_11.svg';
+import i_2_12 from '../theme/icons/wxemoji/i_2_12.svg';
+
+import keep_fighting from '../theme/icons/wxemoji/keep_fighting.svg';
+import no_prob from '../theme/icons/wxemoji/no_prob.svg';
+import shocked from '../theme/icons/wxemoji/shocked.svg';
+import slap from '../theme/icons/wxemoji/slap.svg';
+import social from '../theme/icons/wxemoji/social.svg';
+import sweats from '../theme/icons/wxemoji/sweats.svg';
+import watermelon from '../theme/icons/wxemoji/watermelon.svg';
+import wow from '../theme/icons/wxemoji/wow.svg';
+import yellowdog from '../theme/icons/wxemoji/yellowdog.svg';
+
 export default class Emoji extends Plugin {
 	/**
 	 * @inheritDoc
@@ -29,13 +50,35 @@ export default class Emoji extends Plugin {
 		editor.config.define( 'emojiSmileyIcon', emojiIcon );
 
 		editor.config.define( 'emoji', [
-			{ name: 'smile', text: '😀' },
-			{ name: 'wink', text: '😉' },
-			{ name: 'cool', text: '😎' },
-			{ name: 'surprise', text: '😮' },
-			{ name: 'confusion', text: '😕' },
-			{ name: 'crying', text: '😢' },
-			{ name: 'smile', text: '😡' }
+			{ name: '奸笑', type: 'image', text: '[奸笑]', icon: i_2_02 },
+			{ name: '嘿哈', type: 'image', text: '[嘿哈]', icon: i_2_04 },
+			{ name: '捂脸', type: 'image', text: '[捂脸]', icon: i_2_05 },
+			{ name: '机智', type: 'image', text: '[机智]', icon: i_2_06 },
+			{ name: '茶', type: 'image', text: '[茶]', icon: i_2_07 },
+			{ name: '红包', type: 'image', text: '[红包]', icon: i_2_09 },
+			{ name: '耶', type: 'image', text: '[耶]', icon: i_2_11 },
+			{ name: '皱眉', type: 'image', text: '[皱眉]', icon: i_2_12 },
+			{ name: '吃瓜', type: 'image', text: '[吃瓜]', icon: watermelon },
+			{ name: '加油', type: 'image', text: '[加油]', icon: addoil },
+			{ name: '汗', type: 'image', text: '[汗]', icon: sweats },
+			{ name: '天啊', type: 'image', text: '[天啊]', icon: shocked },
+			{ name: 'Emm', type: 'image', text: '[Emm]', icon: cold },
+			{ name: '社会社会', type: 'image', text: '[社会社会]', icon: social },
+			{ name: '旺柴', type: 'image', text: '[旺柴]', icon: yellowdog },
+			{ name: '好的', type: 'image', text: '[好的]', icon: no_prob },
+			{ name: '打脸', type: 'image', text: '[打脸]', icon: slap },
+			{ name: '加油加油', type: 'image', text: '[加油加油]', icon: keep_fighting },
+			{ name: '哇', type: 'image', text: '[哇]', icon: wow },
+			{ name: '奸笑', type: 'image', text: '[奸笑]', icon: addoil },
+			{ name: '奸笑', type: 'image', text: '[奸笑]', icon: addoil },
+			{ name: 'smile', text: '😄' },
+			{ name: '😷', text: '😷' },
+			{ name: '😂', text: '😂' },
+			{ name: '😝', text: '😝' },
+			{ name: '😳', text: '😳' },
+			{ name: '😱', text: '😱' },
+			{ name: '😔', text: '😔' },
+			{ name: '😒', text: '😒' },
 		] );
 
 		/**

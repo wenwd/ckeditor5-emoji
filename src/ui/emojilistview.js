@@ -55,7 +55,7 @@ export default class EmojiListView extends View {
 		 * @member {module:ui/button/buttonview~ButtonView}
 		 */
 		editor.config.get( 'emoji' ).forEach( emoji => {
-			this.emojiButtonViews.add( this._createButton( emoji.text, 'emoji:' + emoji.name ) );
+			this.emojiButtonViews.add( this._createButton( emoji, 'emoji:' + emoji.name ) );
 		} );
 
 		/**
@@ -152,11 +152,15 @@ export default class EmojiListView extends View {
 	 * @param {String} [eventName] An event name that the `ButtonView#execute` event will be delegated to.
 	 * @returns {module:ui/button/buttonview~ButtonView} The button view instance.
 	 */
-	_createButton( label, eventName ) {
+	_createButton( emoji, eventName ) {
 		const button = new ButtonView( this.locale );
 
-		button.label = label;
-		button.withText = true;
+		button.label = emoji.text;
+		if ( emoji.type === 'image' ) {
+			button.icon = emoji.icon;
+		} else {
+			button.withText = true;
+		}
 
 		if ( eventName ) {
 			button.delegate( 'execute' ).to( this, eventName );
