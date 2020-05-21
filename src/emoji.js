@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 import emojiIcon from '../theme/icons/emoji.svg';
 import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
@@ -63,14 +64,22 @@ export default class Emoji extends Plugin {
 			{ name: '汗', type: 'image', text: '[汗]', icon: sweats },
 			{ name: '天啊', type: 'image', text: '[天啊]', icon: shocked },
 			{ name: 'Emm', type: 'image', text: '[Emm]', icon: cold },
-			{ name: '社会社会', type: 'image', text: '[社会社会]', icon: social },
+			{
+				name: '社会社会',
+				type: 'image',
+				text: '[社会社会]',
+				icon: social,
+			},
 			{ name: '旺柴', type: 'image', text: '[旺柴]', icon: yellowdog },
 			{ name: '好的', type: 'image', text: '[好的]', icon: no_prob },
 			{ name: '打脸', type: 'image', text: '[打脸]', icon: slap },
-			{ name: '加油加油', type: 'image', text: '[加油加油]', icon: keep_fighting },
+			{
+				name: '加油加油',
+				type: 'image',
+				text: '[加油加油]',
+				icon: keep_fighting,
+			},
 			{ name: '哇', type: 'image', text: '[哇]', icon: wow },
-			{ name: '奸笑', type: 'image', text: '[奸笑]', icon: addoil },
-			{ name: '奸笑', type: 'image', text: '[奸笑]', icon: addoil },
 			{ name: 'smile', text: '😄' },
 			{ name: '😷', text: '😷' },
 			{ name: '😂', text: '😂' },
@@ -79,6 +88,37 @@ export default class Emoji extends Plugin {
 			{ name: '😱', text: '😱' },
 			{ name: '😔', text: '😔' },
 			{ name: '😒', text: '😒' },
+
+			{ name: '😉', text: '😉' },
+			{ name: '👻', text: '👻' },
+			{ name: '🙏', text: '🙏' },
+			{ name: '💪', text: '💪' },
+			{ name: '🎉', text: '🎉' },
+			{ name: '🎁', text: '🎁' },
+			{ name: '😍', text: '😍' },
+			{ name: '😘', text: '😘' },
+
+			{ name: '😜', text: '😜' },
+			{ name: '😝', text: '😝' },
+			{ name: '😛', text: '😛' },
+			{ name: '😁', text: '😁' },
+
+			{ name: '😢', text: '😢' },
+			{ name: '😭', text: '😭' },
+			{ name: '😪', text: '😪' },
+			{ name: '😥', text: '😥' },
+			{ name: '😅', text: '😅' },
+			{ name: '😓', text: '😓' },
+			{ name: '😩', text: '😩' },
+			{ name: '😤', text: '😤' },
+
+			{ name: '😖', text: '😖' },
+			{ name: '😆', text: '😆' },
+			{ name: '😎', text: '😎' },
+			{ name: '😴', text: '😴' },
+			{ name: '😲', text: '😲' },
+			{ name: '😈', text: '😈' },
+			{ name: '😮', text: '😮' },
 		] );
 
 		/**
@@ -157,8 +197,8 @@ export default class Emoji extends Plugin {
 			balloonClassName: 'emoji-balloon-panel',
 			position: {
 				target,
-				limiter: target
-			}
+				limiter: target,
+			},
 		} );
 	}
 
@@ -185,7 +225,7 @@ export default class Emoji extends Plugin {
 				// Use the high priority because the emoji UI navigation is more important
 				// than other feature's actions, e.g. list indentation.
 				// https://github.com/ckeditor/ckeditor5-link/issues/146
-				priority: 'high'
+				priority: 'high',
 			}
 		);
 
@@ -202,7 +242,7 @@ export default class Emoji extends Plugin {
 			emitter: this.formView,
 			activator: () => this._balloon.hasView( this.formView ),
 			contextElements: [ this._balloon.view.element ],
-			callback: () => this._hidePanel()
+			callback: () => this._hidePanel(),
 		} );
 	}
 
